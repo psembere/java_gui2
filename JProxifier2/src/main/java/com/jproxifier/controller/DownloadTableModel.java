@@ -83,12 +83,10 @@ public class DownloadTableModel extends AbstractTableModel {
                 JRadioButton b= (JRadioButton)value;
                 if(b.isSelected()) {
                     item.nice1=false;
-                    //System.out.println("sssa1");
                 }
                 else {
                     item.nice1=true;
-                     item.n1.setSelected(true);
-                     //System.out.println("sssa");
+
                 }
                
             }
