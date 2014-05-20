@@ -56,7 +56,8 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         return panel;
     }
     public void setDownloadingTable() {
-        jTableDownloading.setModel(new DownloadTableModel());
+        DownloadTableModel model = new DownloadTableModel();
+        jTableDownloading.setModel(model);
         TableColumn column = null;
         for (int i = 0; i < 8; i++) {
             column = jTableDownloading.getColumnModel().getColumn(i);
@@ -100,8 +101,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jTableDownloading.getColumnModel().getColumn(7).
                 setCellEditor( new RadioButtonEditor(new JCheckBox()));
         
-        int val=Integer.parseInt((String)jTableDownloading.getValueAt(0, 4))*100/  
-               Integer.parseInt((String)jTableDownloading.getValueAt(0, 5)); 
+        int val=model.getData().get(0).getProgress();
         System.out.println(val);
         jProgressBarDownload.setValue(val);
                 

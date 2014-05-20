@@ -17,10 +17,16 @@ public class DownloadItem {
     public String filename;
     public String URLlink;
     public String dateAdded;
-    public String downloaded;
-    public String fileSize;
+    //downloaded [bytes]
+    public Integer downloaded;
+    //total file size in [bytes]
+    public Integer fileSize;
     public Boolean nice9;
     public Boolean nice1;
+
+    public int getProgress() {
+        return downloaded*100/fileSize;
+    }
 
     
 }

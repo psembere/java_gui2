@@ -10,7 +10,6 @@ import com.jproxifier.data.model.DownloadItem;
 import java.util.ArrayList;
 import javax.swing.JRadioButton;
 import javax.swing.table.AbstractTableModel;
-import static sun.security.krb5.internal.Krb5.DEBUG;
 
 /**
  *
@@ -18,10 +17,15 @@ import static sun.security.krb5.internal.Krb5.DEBUG;
  */
 public class DownloadTableModel extends AbstractTableModel {
 
-        
+    boolean DEBUG = true;
     private String[] columnNames = {"Download", "Filename", "URL link", "Date added",
     "downloaded MB", "file size MB", "nice9", "nice1"};
-    private ArrayList<DownloadItem> dat= (new DownloadDataBase().GetDownload());
+    private ArrayList<DownloadItem> dat = (DownloadDataBase.getInstance().GetDownload());
+
+    public ArrayList<DownloadItem> getData() {
+        return dat;
+    }
+    
     public int getRowCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return dat.size();
@@ -45,9 +49,9 @@ public class DownloadTableModel extends AbstractTableModel {
             case 3:               
                 return rec.dateAdded;
             case 4:
-                return rec.downloaded;
+                return Integer.toString(rec.downloaded/1024)+" MB";
             case 5:
-                return rec.fileSize;
+                return Integer.toString(rec.fileSize/1024)+" MB";
             case 6:
                 JRadioButton n9=new JRadioButton();
                 n9.setSelected(rec.nice9);

@@ -8,7 +8,6 @@ package com.jproxifier.controller;
 
 import com.jproxifier.data.model.DownloadItem;
 import java.util.ArrayList;
-import javax.swing.JRadioButton;
 
 /**
  *
@@ -16,22 +15,35 @@ import javax.swing.JRadioButton;
  */
 public class DownloadDataBase {
     
-    ArrayList<DownloadItem> GetDownload() {
-        
-        ArrayList<DownloadItem> ret = new  ArrayList();
-        
+    static boolean isCreated = false;
+    static DownloadDataBase instance = null;
+    private ArrayList<DownloadItem> ret = new  ArrayList();
+
+    public static DownloadDataBase getInstance() {
+        if(instance==null)
+            instance = new DownloadDataBase(1);
+        return instance;
+    }
+
+    public DownloadDataBase() {
+        throw new RuntimeException("DownloadDataBase can be created only once. Call to it using DownloadDataBase.getInstance()");
+    }
+    
+    private DownloadDataBase(int i) {
         DownloadItem item = new DownloadItem();
         item.isDownload=true;
-        item.filename="some_legal_program.zip";
+        item.filename="some_legal_program.zip2";
         item.URLlink="http://rapidshare.com/dwr";
         item.dateAdded="Apr 17 2014 12:12 ";
-        item.downloaded="50";
-        item.fileSize="102";
+        item.downloaded=50*1024;
+        item.fileSize=102*1024;
         item.nice9=true;
         item.nice1=false;
-
-        
-        ret.add(item);       
+        ret.add(item);
+        isCreated=true;
+    }
+    
+    ArrayList<DownloadItem> GetDownload() {
         return ret;
-    } 
+    }
 }
