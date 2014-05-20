@@ -8,6 +8,7 @@ package com.jproxifier.controller;
 
 import com.jproxifier.data.model.DownloadItem;
 import java.util.ArrayList;
+import javax.swing.JRadioButton;
 import javax.swing.table.AbstractTableModel;
 import static sun.security.krb5.internal.Krb5.DEBUG;
 
@@ -48,9 +49,15 @@ public class DownloadTableModel extends AbstractTableModel {
             case 5:
                 return rec.fileSize;
             case 6:
-                return rec.nice9;
+                JRadioButton n9=new JRadioButton();
+                n9.setSelected(rec.nice9);
+                //n9.setSelected();
+                //n9.set
+                return n9;
             case 7:
-                return rec.nice1;
+                JRadioButton n1=new JRadioButton();
+                n1.setSelected(rec.nice1);
+                return n1;
             default:
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
@@ -59,11 +66,7 @@ public class DownloadTableModel extends AbstractTableModel {
     public boolean isCellEditable(int row, int col) {
             //Note that the data/cell address is constant,
             //no matter where the cell appears onscreen.
-            if (col < 2) {
-                return true;
-            } else {
-                return false;
-            }
+            return true;
         }
    public void setValueAt(Object value, int row, int col) {
             if (DEBUG) {
@@ -72,15 +75,25 @@ public class DownloadTableModel extends AbstractTableModel {
                                    + " (an instance of "
                                    + value.getClass() + ")");
             }
- 
-            //dat.get(0) = value;
-            //dat[row][col] = value;
             DownloadItem item = dat.get(row);
-            //String s = (String) value;
             if(col==0) {
                 item.isDownload= (Boolean) value;
-             }
+            }
+            if(col==7) {
+                JRadioButton b= (JRadioButton)value;
+                if(b.isSelected()) {
+                    item.nice1=false;
+                    //System.out.println("sssa1");
+                }
+                else {
+                    item.nice1=true;
+                     item.n1.setSelected(true);
+                     //System.out.println("sssa");
+                }
+               
+            }
             dat.set(row, item);
+          
             fireTableCellUpdated(row, col);
  
             if (DEBUG) {

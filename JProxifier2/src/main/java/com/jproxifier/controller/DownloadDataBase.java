@@ -8,6 +8,7 @@ package com.jproxifier.controller;
 
 import com.jproxifier.data.model.DownloadItem;
 import java.util.ArrayList;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -26,9 +27,9 @@ public class DownloadDataBase {
         item.dateAdded="Apr 17 2014 12:12 ";
         item.downloaded="50MB";
         item.fileSize="102MB";
-        item.nice9="true";
-        item.nice1="false";
-        
+        item.nice9=true;
+        item.nice1=false;
+
         
         ret.add(item);       
         return ret;

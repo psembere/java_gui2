@@ -6,18 +6,22 @@
 
 package com.jproxifier.data.model;
 
+import javax.swing.JRadioButton;
+
 /**
  *
  * @author Piotr
  */
 public class DownloadItem {
-    public boolean isDownload;
+    public Boolean isDownload;
     public String filename;
     public String URLlink;
     public String dateAdded;
     public String downloaded;
     public String fileSize;
-    public String nice9;
-    public String nice1;
+    public Boolean nice9;
+    public Boolean nice1;
+    public JRadioButton n9;
+    public JRadioButton n1;
     
 }

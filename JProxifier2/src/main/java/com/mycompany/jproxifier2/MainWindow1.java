@@ -88,14 +88,16 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                     
             }
         }
-//        ButtonGroup group1 = new ButtonGroup();
-//        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 6));
-//        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 7));
-//
-//        jTableDownloading.getColumn("JRadioButton").setCellRenderer(
-//            new RadioButtonRenderer());
-//        jTableDownloading.getColumn("JRadioButton").setCellEditor(
-//            new RadioButtonEditor(new JCheckBox()));
+        ButtonGroup group1 = new ButtonGroup();
+        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 6));
+        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 7));
+        jTableDownloading.getColumnModel().getColumn(6).setCellRenderer(new RadioButtonRenderer());
+        jTableDownloading.getColumnModel().getColumn(6).
+                setCellEditor( new RadioButtonEditor(new JCheckBox()));
+        jTableDownloading.getColumnModel().getColumn(7).setCellRenderer(new RadioButtonRenderer());
+        jTableDownloading.getColumnModel().getColumn(7).
+                setCellEditor( new RadioButtonEditor(new JCheckBox()));
+
     }
     public void setPluginTable() {
 
