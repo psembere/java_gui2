@@ -25,8 +25,8 @@ public class DownloadDataBase {
         item.filename="some_legal_program.zip";
         item.URLlink="http://rapidshare.com/dwr";
         item.dateAdded="Apr 17 2014 12:12 ";
-        item.downloaded="50MB";
-        item.fileSize="102MB";
+        item.downloaded="50";
+        item.fileSize="102";
         item.nice9=true;
         item.nice1=false;
 

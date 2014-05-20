@@ -20,7 +20,7 @@ public class DownloadTableModel extends AbstractTableModel {
 
         
     private String[] columnNames = {"Download", "Filename", "URL link", "Date added",
-    "downloaded", "file size", "nice9", "nice1"};
+    "downloaded MB", "file size MB", "nice9", "nice1"};
     private ArrayList<DownloadItem> dat= (new DownloadDataBase().GetDownload());
     public int getRowCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -51,8 +51,6 @@ public class DownloadTableModel extends AbstractTableModel {
             case 6:
                 JRadioButton n9=new JRadioButton();
                 n9.setSelected(rec.nice9);
-                //n9.setSelected();
-                //n9.set
                 return n9;
             case 7:
                 JRadioButton n1=new JRadioButton();
@@ -83,14 +81,21 @@ public class DownloadTableModel extends AbstractTableModel {
                 JRadioButton b= (JRadioButton)value;
                 if(b.isSelected()) {
                     item.nice1=false;
+                    item.nice9=true;
+                    //item.no
+                    
                 }
                 else {
                     item.nice1=true;
-
+                    item.nice9=false;
                 }
                
             }
+
+               
+            
             dat.set(row, item);
+           
           
             fireTableCellUpdated(row, col);
  

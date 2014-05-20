@@ -88,15 +88,23 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                     
             }
         }
-        ButtonGroup group1 = new ButtonGroup();
-        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 6));
-        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 7));
+        //ButtonGroup group1 = new ButtonGroup();
+        //group1.add((JRadioButton) jTableDownloading.getValueAt(0, 6));
+        //group1.add((JRadioButton) jTableDownloading.getValueAt(0, 7));
+        
+    
         jTableDownloading.getColumnModel().getColumn(6).setCellRenderer(new RadioButtonRenderer());
         jTableDownloading.getColumnModel().getColumn(6).
                 setCellEditor( new RadioButtonEditor(new JCheckBox()));
         jTableDownloading.getColumnModel().getColumn(7).setCellRenderer(new RadioButtonRenderer());
         jTableDownloading.getColumnModel().getColumn(7).
                 setCellEditor( new RadioButtonEditor(new JCheckBox()));
+        
+        int val=Integer.parseInt((String)jTableDownloading.getValueAt(0, 4))*100/  
+               Integer.parseInt((String)jTableDownloading.getValueAt(0, 5)); 
+        System.out.println(val);
+        jProgressBarDownload.setValue(val);
+                
 
     }
     public void setPluginTable() {
@@ -153,7 +161,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDownloading = new javax.swing.JTable();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        jProgressBarDownload = new javax.swing.JProgressBar();
         jTextField1 = new javax.swing.JTextField();
         jPanelStartStopPanel = new javax.swing.JPanel();
         jButtonStartAll = new javax.swing.JButton();
@@ -168,7 +176,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jSlider1 = new javax.swing.JSlider();
+        jSliderButton = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -238,7 +246,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBarDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -252,7 +260,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBarDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -355,7 +363,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
 
         jTabbedPane.addTab("Plugins", jPanel6);
 
-        jSlider1.setMaximum(1);
+        jSliderButton.setMaximum(1);
 
         jLabel1.setText("Override system's proxy");
 
@@ -376,7 +384,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSliderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
@@ -389,7 +397,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(15, Short.MAX_VALUE)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSliderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -452,11 +460,11 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelStartStopPanel;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBarDownload;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSliderButton;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;

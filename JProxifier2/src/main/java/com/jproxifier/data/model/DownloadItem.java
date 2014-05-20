@@ -21,7 +21,6 @@ public class DownloadItem {
     public String fileSize;
     public Boolean nice9;
     public Boolean nice1;
-    public JRadioButton n9;
-    public JRadioButton n1;
+
     
 }
