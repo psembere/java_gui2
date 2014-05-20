@@ -31,6 +31,10 @@ public class DownloadTableModel extends AbstractTableModel {
         return dat.size();
     }
 
+    public DownloadItem getRowAt(int index) {
+        return dat.get(index);
+    
+    }
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return columnNames.length;

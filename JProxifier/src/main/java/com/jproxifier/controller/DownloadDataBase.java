@@ -40,6 +40,16 @@ public class DownloadDataBase {
         item.nice9=true;
         item.nice1=false;
         ret.add(item);
+        item = new DownloadItem();
+        item.isDownload=true;
+        item.filename="some_legal_program2.zip2";
+        item.URLlink="http://rapidshare.com/dwr";
+        item.dateAdded="Apr 17 2014 12:12 ";
+        item.downloaded=20*1024;
+        item.fileSize=102*1024;
+        item.nice9=true;
+        item.nice1=false;
+        ret.add(item);
         isCreated=true;
     }
     

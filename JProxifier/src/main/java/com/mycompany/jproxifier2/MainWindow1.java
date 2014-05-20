@@ -12,6 +12,8 @@ import com.jproxifier.controller.RadioButtonRenderer;
 import com.jproxifier.controller.RadioButtonEditor;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -27,6 +29,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     /**
      * Creates new form MainWindow
      */
+    DownloadTableModel model = new DownloadTableModel();
     public MainWindow1() {
         initComponents();
         //setSize(600, 400); //use preffered size instead.
@@ -56,7 +59,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         return panel;
     }
     public void setDownloadingTable() {
-        DownloadTableModel model = new DownloadTableModel();
+       
         jTableDownloading.setModel(model);
         TableColumn column = null;
         for (int i = 0; i < 8; i++) {
@@ -102,27 +105,36 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 setCellEditor( new RadioButtonEditor(new JCheckBox()));
         
         int val=model.getData().get(0).getProgress();
-        System.out.println(val);
         jProgressBarDownload.setValue(val);
-                
-
+        //System.out.println(rowS);
+            
+        jTableDownloading.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+            int rowS = jTableDownloading.getSelectedRow();
+            int val=model.getData().get(rowS).getProgress();
+            jProgressBarDownload.setValue(val);
+            }
+        });
+        
+        
+                    
     }
     public void setPluginTable() {
 
-        jTable2.setModel(new PluginTableModel());
-                //Create the scroll pane and add the table to it.
-        JScrollPane scrollPane = new JScrollPane(jTable2);
-
+        jTablePlugins.setModel(new PluginTableModel());              
+        //JScrollPane scrollPane = new JScrollPane(jTablePlugins);
         //Add the scroll pane to this panel.
-        jTable2.add(scrollPane);
+        //jTablePlugins.add(scrollPane);
         
     }
     public void setDowloadingTab() {
         setDownloadingTable();
+       
     }
     public void initTabs() {
           
         setDowloadingTab();
+        setPluginTable();
 //        URL res = MainWindow.class.getResource("downloadall.gif");
         
         //ImageIcon icon = resizeIcon(new ImageIcon(res), 48/2, 48/2);
@@ -175,7 +187,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTablePlugins = new javax.swing.JTable();
         jSliderButton = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -331,7 +343,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
 
         jTabbedPane.addTab("Settings", jPanel5);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePlugins.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -342,9 +354,9 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane3.setViewportView(jTablePlugins);
+        if (jTablePlugins.getColumnModel().getColumnCount() > 0) {
+            jTablePlugins.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -469,8 +481,8 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableDownloading;
+    private javax.swing.JTable jTablePlugins;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
