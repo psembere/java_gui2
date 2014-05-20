@@ -13,6 +13,8 @@ import javax.swing.JRadioButton;
  * @author Piotr
  */
 @lombok.Data //this makes automatically getters and others! 
+@lombok.AllArgsConstructor
+@lombok.NoArgsConstructor
 public class DownloadItem {
     public Boolean isDownload;
     public String filename;

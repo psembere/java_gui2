@@ -30,15 +30,8 @@ public class DownloadDataBase {
     }
     
     private DownloadDataBase(int i) {
-        DownloadItem item = new DownloadItem();
-        item.isDownload=true;
-        item.filename="some_legal_program.zip2";
-        item.URLlink="http://rapidshare.com/dwr";
-        item.dateAdded="Apr 17 2014 12:12 ";
-        item.downloaded=50*1024;
-        item.fileSize=102*1024;
-        item.nice9=true;
-        item.nice1=false;
+        DownloadItem item = new DownloadItem(true, "some_legal_program.zip2", "http://rapidshare.com/dwr", "Apr 17, 2014 12:12:12", 50*1024, 102*1024, true, false);
+        
         ret.add(item);
         isCreated=true;
     }
