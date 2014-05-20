@@ -1,4 +1,4 @@
-package com.mycompany.jproxifier2;
+package com.mycompany.jproxifier;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
