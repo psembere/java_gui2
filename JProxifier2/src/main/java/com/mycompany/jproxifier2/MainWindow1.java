@@ -6,13 +6,15 @@
 
 package com.mycompany.jproxifier2;
 
-import com.jproxifier.source.DownloadTableModel;
-import com.jproxifier.source.PluginTableModel;
+import com.jproxifier.controller.DownloadTableModel;
+import com.jproxifier.controller.PluginTableModel;
+import com.jproxifier.controller.RadioButtonRenderer;
+import com.jproxifier.controller.RadioButtonEditor;
+
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 
 
 
@@ -42,8 +44,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        initRibbon();
         initTabs();
-        jTable1.setModel(new DownloadTableModel());
-        jTable2.setModel(new PluginTableModel());
+
     }
          
     protected JComponent makeTextPanel(String text) {
@@ -54,9 +55,64 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         panel.add(filler);
         return panel;
     }
+    public void setDownloadingTable() {
+        jTableDownloading.setModel(new DownloadTableModel());
+        TableColumn column = null;
+        for (int i = 0; i < 8; i++) {
+            column = jTableDownloading.getColumnModel().getColumn(i);
+            switch(i) {
+                case 0:
+                    column.setPreferredWidth(60);
+                    break;
+                case 1:                  
+                    column.setPreferredWidth(140);
+                    break;
+                case 2:                  
+                    column.setPreferredWidth(140);
+                    break;
+                case 3:                  
+                    column.setPreferredWidth(80);
+                    break;
+                case 4:                                                                  
+                    column.setPreferredWidth(60);
+                    break;
+                case 5:                                                                  
+                    column.setPreferredWidth(40);
+                    break;
+                case 6:                                                                  
+                    column.setPreferredWidth(20);
+                    break;    
+                case 7:                                                                  
+                    column.setPreferredWidth(20);                 
+                    break;  
+                    
+            }
+        }
+//        ButtonGroup group1 = new ButtonGroup();
+//        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 6));
+//        group1.add((JRadioButton) jTableDownloading.getValueAt(0, 7));
+//
+//        jTableDownloading.getColumn("JRadioButton").setCellRenderer(
+//            new RadioButtonRenderer());
+//        jTableDownloading.getColumn("JRadioButton").setCellEditor(
+//            new RadioButtonEditor(new JCheckBox()));
+    }
+    public void setPluginTable() {
+
+        jTable2.setModel(new PluginTableModel());
+                //Create the scroll pane and add the table to it.
+        JScrollPane scrollPane = new JScrollPane(jTable2);
+
+        //Add the scroll pane to this panel.
+        jTable2.add(scrollPane);
+        
+    }
+    public void setDowloadingTab() {
+        setDownloadingTable();
+    }
     public void initTabs() {
-        
-        
+          
+        setDowloadingTab();
 //        URL res = MainWindow.class.getResource("downloadall.gif");
         
         //ImageIcon icon = resizeIcon(new ImageIcon(res), 48/2, 48/2);
@@ -94,7 +150,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableDownloading = new javax.swing.JTable();
         jProgressBar1 = new javax.swing.JProgressBar();
         jTextField1 = new javax.swing.JTextField();
         jPanelStartStopPanel = new javax.swing.JPanel();
@@ -128,7 +184,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(600, 400));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDownloading.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -139,7 +195,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableDownloading);
 
         jTextField1.setText("search");
 
@@ -154,52 +210,48 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jPanelStartStopPanelLayout.setHorizontalGroup(
             jPanelStartStopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelStartStopPanelLayout.createSequentialGroup()
-                .addComponent(jButtonStartAll)
-                .addGap(18, 18, 18)
+                .addComponent(jButtonStartAll, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonStopAll)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelStartStopPanelLayout.setVerticalGroup(
             jPanelStartStopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelStartStopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButtonStartAll, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonStopAll, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStartStopPanelLayout.createSequentialGroup()
+                .addGroup(jPanelStartStopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonStopAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonStartAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addComponent(jPanelStartStopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanelStartStopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 15, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelStartStopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane.addTab("Downloading", jPanel1);
@@ -213,22 +265,18 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(179, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -285,6 +333,9 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
             }
         ));
         jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -408,8 +459,8 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableDownloading;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables

@@ -10,7 +10,7 @@ public class JProxifier2
     {
          System.out.println("We are loading main JFrame using this wrapper because if there are any problems with dependencies, this class will be executed and will throw NoClassDefExcaption, in consequence at least error message will be shown.");
          MainWindow1 window = new MainWindow1(); //initialization in main
-         window.setSize(630,500);
+         window.setSize(690,500);
          window.setVisible(true);
 
          
