@@ -12,6 +12,7 @@ import javax.swing.JRadioButton;
  *
  * @author Piotr
  */
+@lombok.Data //this makes automatically getters and others! 
 public class DownloadItem {
     public Boolean isDownload;
     public String filename;
@@ -28,5 +29,6 @@ public class DownloadItem {
         return downloaded*100/fileSize;
     }
 
+    
     
 }
