@@ -19,6 +19,14 @@ public class DownloadDataBase {
     static DownloadDataBase instance = null;
     private ArrayList<DownloadItem> ret = new  ArrayList();
 
+    public ArrayList<DownloadItem> getRet() {
+        return ret;
+    }
+
+    public void setRet(ArrayList<DownloadItem> ret) {
+        this.ret = ret;
+    }
+
     public static DownloadDataBase getInstance() {
         if(instance==null)
             instance = new DownloadDataBase(1);
@@ -42,7 +50,7 @@ public class DownloadDataBase {
         ret.add(item);
         item = new DownloadItem();
         item.isDownload=true;
-        item.filename="some_legal_program2.zip2";
+        item.filename="foto.jpg";
         item.URLlink="http://rapidshare.com/dwr";
         item.dateAdded="Apr 17 2014 12:12 ";
         item.downloaded=20*1024;

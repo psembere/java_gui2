@@ -16,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableColumn;
 
 
@@ -115,13 +117,27 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
             jProgressBarDownload.setValue(val);
             }
         });
+       jTextFieldSearch.getDocument().addDocumentListener(new DocumentListener() {
+        public void changedUpdate(DocumentEvent e) {
+          //warn();
+         //System.out.println("update");
+        }
+        public void removeUpdate(DocumentEvent e) {
+          //System.out.println("remove");
+        }
+        public void insertUpdate(DocumentEvent e) {
+          //System.out.println("insert");
+        }
+        
+      });
         
         
                     
     }
     public void setPluginTable() {
 
-        jTablePlugins.setModel(new PluginTableModel());              
+        jTablePlugins.setModel(new PluginTableModel());       
+
         //JScrollPane scrollPane = new JScrollPane(jTablePlugins);
         //Add the scroll pane to this panel.
         //jTablePlugins.add(scrollPane);
@@ -174,10 +190,11 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDownloading = new javax.swing.JTable();
         jProgressBarDownload = new javax.swing.JProgressBar();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldSearch = new javax.swing.JTextField();
         jPanelStartStopPanel = new javax.swing.JPanel();
         jButtonStartAll = new javax.swing.JButton();
         jButtonStopAll = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -219,7 +236,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         ));
         jScrollPane2.setViewportView(jTableDownloading);
 
-        jTextField1.setText("search");
+        jTextFieldSearch.setText("search");
 
         jPanelStartStopPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Control"));
 
@@ -246,6 +263,13 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 .addGap(4, 4, 4))
         );
 
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,7 +283,10 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jProgressBarDownload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -268,9 +295,11 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
                 .addContainerGap()
                 .addComponent(jPanelStartStopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBarDownload, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -418,6 +447,20 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String s =jTextFieldSearch.getText();     
+        for( int i=0; i<model.getData().size();i++) {
+            if(model.getData().get(i).filename.equals(s)) {
+                jTableDownloading.clearSelection();
+                jTableDownloading.addRowSelectionInterval(i,i);
+                int val=model.getData().get(i).getProgress();
+                jProgressBarDownload.setValue(val);
+                break;
+            }          
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -454,6 +497,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonStartAll;
     private javax.swing.JButton jButtonStopAll;
     private javax.swing.JLabel jLabel1;
@@ -483,7 +527,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTable jTableDownloading;
     private javax.swing.JTable jTablePlugins;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 
