@@ -19,7 +19,7 @@ public class DownloadTableModel extends AbstractTableModel {
 
     boolean DEBUG = true;
     private String[] columnNames = {"Download", "Filename", "URL link", "Date added",
-    "downloaded MB", "file size MB", "nice9", "nice1"};
+    "downloaded MB", "file size MB", "in progress", "finished"};
     private ArrayList<DownloadItem> dat = (DownloadDataBase.getInstance().GetDownload());
 
     public ArrayList<DownloadItem> getData() {

@@ -55,7 +55,7 @@ public class DownloadDataBase {
         item.dateAdded="Apr 17 2014 12:12 ";
         item.downloaded=20*1024;
         item.fileSize=102*1024;
-        item.nice9=true;
+        item.nice9=false;
         item.nice1=false;
         ret.add(item);
         isCreated=true;
