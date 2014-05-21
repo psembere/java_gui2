@@ -7,6 +7,7 @@
 package com.jproxifier.controller;
 
 import com.jproxifier.data.model.DownloadItem;
+import com.jproxifier.data.model.Listener;
 import java.util.ArrayList;
 import javax.swing.JRadioButton;
 import javax.swing.table.AbstractTableModel;
@@ -19,8 +20,36 @@ public class DownloadTableModel extends AbstractTableModel {
 
     boolean DEBUG = true;
     private String[] columnNames = {"Download", "Filename", "URL link", "Date added",
-    "downloaded MB", "file size MB", "nice9", "nice1"};
-    private ArrayList<DownloadItem> dat = (DownloadDataBase.getInstance().GetDownload());
+    "downloaded MB", "file size MB", "nice1", "nice9"};
+    private ArrayList<DownloadItem> dat = null;
+
+    public DownloadTableModel() {
+        new Thread(DownloadDataBase.getInstance()).start();
+        updateData();
+    }
+    
+    final public void updateData() {
+        dat = (DownloadDataBase.getInstance().GetDownload());
+        for (int i = 0; i < dat.size(); i++) {
+            
+            DownloadItem item = dat.get(i);
+            item.add(new Listener() {
+                Integer r;
+
+                public Listener setR(Integer r) {
+                    this.r = r;
+                    return this;
+                }
+                
+                @Override
+                public void call() {
+                    fireTableRowsUpdated(r, r);
+                }
+                
+            }.setR(i));
+        }
+ 
+    }
 
     public ArrayList<DownloadItem> getData() {
         return dat;
@@ -41,7 +70,7 @@ public class DownloadTableModel extends AbstractTableModel {
         switch (columnIndex)
         {
             case 0:
-                return rec.isDownload;
+                return rec.getDownload();
             case 1:
                 return rec.filename;
             case 2: 
@@ -53,13 +82,13 @@ public class DownloadTableModel extends AbstractTableModel {
             case 5:
                 return Integer.toString(rec.fileSize/1024)+" MB";
             case 6:
-                JRadioButton n9=new JRadioButton();
-                n9.setSelected(rec.nice9);
-                return n9;
-            case 7:
                 JRadioButton n1=new JRadioButton();
-                n1.setSelected(rec.nice1);
+                n1.setSelected(rec.getPriority()<9);
                 return n1;
+            case 7:
+                JRadioButton n9=new JRadioButton();
+                n9.setSelected(rec.getPriority()>=9);
+                return n9;
             default:
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
@@ -79,32 +108,23 @@ public class DownloadTableModel extends AbstractTableModel {
             }
             DownloadItem item = dat.get(row);
             if(col==0) {
-                item.isDownload= (Boolean) value;
+                item.setDownload((Boolean) value);
             }
-            if(col==7) {
+            else if(col==6) {
                 JRadioButton b= (JRadioButton)value;
-                if(b.isSelected()) {
-                    item.nice1=false;
-                    item.nice9=true;
-                    //item.no
-                    
-                }
-                else {
-                    item.nice1=true;
-                    item.nice9=false;
-                }
-               
+                item.priority=1;
+            }
+            else if(col==7) {
+                JRadioButton b= (JRadioButton)value;
+                item.priority=9;
             }
 
-               
-            
             dat.set(row, item);
-           
           
-            fireTableCellUpdated(row, col);
+            fireTableRowsUpdated(row, row);
  
             if (DEBUG) {
-                System.out.println("New value of data:");
+                System.out.println("New value of data:"+ item);
         //        printDebugData();
             }
         }
