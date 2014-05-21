@@ -37,7 +37,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         //setSize(600, 400); //use preffered size instead.
         setTitle("JProxifier by AZ & PS - PWr 2014");
 //        setLocationRelativeTo(null); //Center window in both axises.
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         Rectangle r = GraphicsEnvironment.getLocalGraphicsEnvironment()
         .getMaximumWindowBounds();
@@ -46,7 +46,7 @@ public class MainWindow1 extends JFrame /*JRibbonFrame*/ {
         pack();
         //setLocation(r.x, r.y);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        initRibbon();
         initTabs();
 
